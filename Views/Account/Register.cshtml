@@ -1,0 +1,91 @@
+﻿@model Cash_Back.Models.ViewModel.RegisterVM
+
+<head>
+<link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" /> 
+    <link href="~/css/loginn.css"  rel="stylesheet" />
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body style="overflow: hidden">
+<section class="container">
+  <div  class="container py-5 h-100"  style="margin-top: -30px; ">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-8 col-lg-7 col-xl-6">
+        <img src="~/loginform.png" class="img-fluid" alt="Phone image">
+      </div>
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+          <h5 class="text-center">Register</h5>
+        <form method="post" asp-action="Register" asp-controller="Account" autocomplete="off">
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+         <div class="form-floating mb-3">
+                <input asp-for="Name" type="text" class="form-control" id="floatingInputUsername" placeholder="myusername" required >
+                <label for="floatingInputUsername">Username</label>
+                <span asp-validation-for="Name" class="text-danger"></span>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input asp-for="UserEmail" type="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com" required>
+                <label for="floatingInputEmail">Email address</label>
+                 <span asp-validation-for="UserEmail" class="text-danger"></span>
+              </div>
+
+              <hr>
+
+              <div class="form-floating mb-3">
+                <input asp-for="Password" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                <label for="floatingPassword">Password</label>
+                 <span asp-validation-for="Password" class="text-danger"></span>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input asp-for="ConfirmPass" type="password" class="form-control" autocomplete="off" id="floatingPasswordConfirm" placeholder="Confirm Password" required>
+                <label for="floatingPasswordConfirm">Confirm Password</label>
+                 <span asp-validation-for="ConfirmPass" class="text-danger"></span>
+              </div>
+
+              <div class="d-grid mb-2">
+                <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit">Register</button>
+              </div>
+
+              <a class="d-block text-center mt-2 small" asp-area="" asp-controller="Account" asp-action="Login">Have an account? Sign In</a>
+
+              <hr class="my-4">
+              </form>
+              <form method="post">
+                  <div class="d-grid mb-2">
+                <button asp-action="ExternalLogin" asp-controller="Account"  class="btn btn-lg btn-danger btn-google btn-login fw-bold text-uppercase" type="submit">
+                  <i class="fab fa-google me-2"></i> Sign up with Google
+                </button>
+              </div>
+			  </form>
+              
+
+              <div class="d-grid">
+                <button class="btn btn-lg btn-primary btn-facebook btn-login fw-bold text-uppercase" type="submit">
+                  <i class="fab fa-facebook-f me-2"></i> Sign up with Facebook
+                </button>
+              </div>
+
+            
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://lipis.github.io/bootstrap-sweetalert/lib/sweet-alert.js"></script> 
+    <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" /> 
+    <script src="~/limonte-sweetalert2/sweetalert2.js"></script>  
+
+  
+
+    <script>
+        var swlValue ="@((string)ViewBag.newUserSWL)";
+        if(swlValue!==null&&swlValue!=='')
+        {
+           new swal("Account Created",swlValue, "success");
+            
+        }
+	</script>
+
+}

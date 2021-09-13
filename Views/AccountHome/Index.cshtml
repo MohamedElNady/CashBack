@@ -1,0 +1,201 @@
+﻿@using Cash_Back.Models.ViewModel
+
+@model IEnumerable<Cash_Back.Models.ViewModel.AddItemVM>
+<head>
+	<style>
+		:root {
+			--surface-color: #fff;
+			--curve: 40;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Noto Sans JP', sans-serif;
+			/* background-color: #fef8f8;*/
+		}
+
+		.cards {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 2rem;
+			margin: 4rem 5vw;
+			padding: 0;
+			list-style-type: none;
+		}
+
+		.card {
+			position: relative;
+			display: block;
+			height: 100%;
+			border-radius: calc(var(--curve) * 1px);
+			border: 1px solid #BFBFBF;
+			background-color: white;
+			box-shadow: 7px 7px 7px #aaaaaa;
+			overflow: hidden;
+			text-decoration: none;
+		}
+
+		.card__image {
+			width: 100%;
+			height: auto;
+		}
+
+		.card__overlay {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			z-index: 1;
+			border-radius: calc(var(--curve) * 1px);
+			background-color: var(--surface-color);
+			transform: translateY(100%);
+			transition: .2s ease-in-out;
+		}
+
+		.card:hover .card__overlay {
+			transform: translateY(0);
+		}
+
+		.card__header {
+			position: relative;
+			display: flex;
+			align-items: center;
+			gap: 2em;
+			padding: 1em;
+			border-radius: calc(var(--curve) * 1px) 0 0 0;
+			background-color: var(--surface-color);
+			transform: translateY(-100%);
+			transition: .2s ease-in-out;
+			border-top: 1px solid #BFBFBF;
+			background-color: white;
+		}
+
+		.card__arc {
+			width: 80px;
+			height: 80px;
+			position: absolute;
+			bottom: 100%;
+			right: 0;
+			z-index: 1;
+		}
+
+			.card__arc path {
+				fill: var(--surface-color);
+				d: path("M 40 80 c 22 0 40 -22 40 -40 v 40 Z");
+			}
+
+		.card:hover .card__header {
+			transform: translateY(0);
+		}
+
+		.card__thumb {
+			flex-shrink: 0;
+			width: 50px;
+			height: 50px;
+			border:0.5px solid;
+			border-radius: 50%;
+		}
+
+		.card__title {
+			font-size: 1em;
+			margin: 0 0 .3em;
+			color: #6A515E;
+		}
+
+		.card__tagline {
+			display: block;
+			margin: 1em 0;
+			font-family: "MockFlowFont";
+			font-size: .8em;
+			color: #D7BDCA;
+		}
+
+		.card__status {
+			font-size: .8em;
+			color: #D7BDCA;
+		}
+
+		.card__description {
+			
+			margin-bottom: 5px;
+			color: #D7BDCA;
+			font-family: "MockFlowFont";
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 3;
+			overflow: hidden;
+		}
+	</style>
+</head>
+
+
+
+<div class="text-center">
+	<h1 class="display-4">Enjoy With Us, Get Extra CASH BACK</h1>
+	<img id="getbigimg" class="card__image" alt="" />
+</div>
+<form method="post">
+	@*	<button onclick="addItemCard()" type="button"><i class="icon-plus-sign"></i> icon-plus-signAdd New Item</button>
+	*@
+
+		  @if (User.IsInRole("Admin"))
+                    {
+	<div class="col text-center">
+		<button style="border-radius:50%;" onclick="addItemCard()" type="button">
+			<i class="fas fa-plus-circle fa-5x"></i>
+
+		</button>
+	</div>
+	}
+</form>
+
+
+<ul class="cards">
+	@if (Model.Count() > 0)
+	{
+		@foreach (var item in Model.Reverse())
+		{
+
+			<input class="test" hidden id="@item.Id"></input>
+			<li style="height:250px; max-width:400px;" id="newcarditemli">
+				<div style="" class="card">
+					<img id="getbigimgcard_@item.Id" src="" class="card__image" alt="" />
+					<div class="card__overlay">
+						<div class="card__header">
+							<svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
+							<img id="samllimgcard_@item.Id" class="card__thumb" src="" alt="" />
+							<div class="card__header-text">
+								<h3 id="titlecard_@item.Id" class="card__title"></h3>
+								<span id="discountcard_@item.Id" class="card__status"></span>
+							</div>
+						</div>
+						<p style="text-align:center; padding: 1px;" id="descriptioncard_@item.Id" class="card__description"></p>
+						  @if (User.IsInRole("Admin"))
+                    {
+						<div style="margin-right: 1px; margin-left: 1px;" class="row justify-content-between" role="group" aria-label="Basic example">
+							<button id="@item.Id" onclick="onEditCard(this.id)"  type="button" class="btn btn-secondary"><i class="fas fa-edit fa-1x"></i> </button>
+
+							<button id="@item.Id" onclick="onDeleteCard(this.id)"  type="button" class="btn btn-secondary"><i class="far fa-trash-alt"></i> </button>
+						</div>
+                   
+                    }
+                  
+
+					</div>
+
+				</div>
+			</li>
+		}
+	}
+
+</ul>
+
+
+
+
+
+<partial name="_AddItemView" />
+<script src="~/js/ControlItems.js" defer></script>

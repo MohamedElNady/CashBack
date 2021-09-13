@@ -1,0 +1,14 @@
+﻿.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+.img-fluid
+{
+    padding:20px;
+}
+.row{
+    padding-bottom:20px;
+}

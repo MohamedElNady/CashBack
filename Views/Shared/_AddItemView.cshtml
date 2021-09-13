@@ -1,0 +1,62 @@
+﻿
+<div class="modal fade" role="dialog" id="addItemCard" data-backdrop="static" data-keyboard="false">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="AddCardForm" autocomplete="off" novalidate="novalidate">
+                <div class="modal-header">
+
+                    <h4 class="modal-title">Add New Item</h4>
+                 
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="providertitle">Provider Title</label>
+                        <input type="text" maxlength="100" class="form-control" id="providertitle" />
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Descriptions</label>
+                        <textarea type="text" class="form-control" id="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="bigimg">Headr Image Url</label>
+                        <input type="text" class="form-control" id="bigimg"></input>
+                    </div>
+                    <div class="form-group">
+                        <label for="smallimg">Provider Image Url</label>
+                        <input type="text" class="form-control" id="smallimg"></input>
+                    </div>
+                    <div class="form-group">
+								<label for="discountselect">Select Discount Value</label>
+								<select id="discountselect" class="form-control">
+									<option  value="choose" selected disabled hidden>Choose here</option>
+									<option id="a" value="5%">5%</option>
+									<option id="b" value="10%">10%</option>
+                                    <option id="c" value="15%">15%</option>
+                                    <option id="d" value="20%">20%</option>
+                                    <option id="e" value="20%">25%</option>
+                                    <option id="f" value="30%">30%</option>
+                                    <option id="g" value="50%">50%</option>
+                                    <option id="h" value="70%">70%</option>
+                                    <option id="i" value="90%">80%</option>
+                                    <option id="j" value="90%">90%</option>
+                                    <option id="k" value="90%">100%</option>
+
+								</select>
+							</div>
+                        
+                   <input id="id" type="hidden"></input>
+                        
+                    
+                  
+                <div class="modal-footer">
+                    <button type="button" id="edititem" hidden class="btn btn-warning" onclick="onCloseEdit();">Close</button> &nbsp;
+                        <button type="button" id="ClosemOdel" class="btn btn-secondary" onclick="onCloseModal();">Close</button> &nbsp;
+                        <button type="button" id="btnConfirm" class="btn btn-success" onclick="onAddItem();">Add Item</button>&nbsp;
+                        <button type="button" id="btnDelete" class="btn btn-danger" onclick="onDeleteModel();">Delete</button>&nbsp
+                        <button type="button" hidden  id="btnEdit" class="btn btn-info hide" onclick="updateModalItem();">Edit Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
